@@ -22,6 +22,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import com.example.android.quakereport.untils.QueryUtils;
 
 import java.util.ArrayList;
 
