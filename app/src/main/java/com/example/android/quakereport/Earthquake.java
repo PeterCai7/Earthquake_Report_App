@@ -15,6 +15,9 @@
  */
 package com.example.android.quakereport;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * An {@link Earthquake} object contains information related to a single earthquake.
  */
