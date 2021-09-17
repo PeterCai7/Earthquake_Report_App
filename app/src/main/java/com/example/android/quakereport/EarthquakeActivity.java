@@ -19,13 +19,13 @@ import android.app.LoaderManager;
 import android.content.Intent;
 import android.content.Loader;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import com.example.android.quakereport.untils.QueryUtils;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,15 +38,20 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
     private static final int EARTHQUAKE_LOADER_ID = 1;
 
     private EarthquakeAdapter earthquakeAdapter;
+    private TextView mEmptyStateTextView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(LOG_TAG, "EarthquakeActivity onCreate() method was called!");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_activity);
 
         // Find a reference to the {@link ListView} in the layout
         ListView earthquakeListView = (ListView) findViewById(R.id.list);
+
+        mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
+        earthquakeListView.setEmptyView(mEmptyStateTextView);
 
         // Create a new adapter that takes an empty list of earthquakes as input
         earthquakeAdapter = new EarthquakeAdapter(this, new ArrayList<Earthquake>());
@@ -81,13 +86,19 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
 
     @Override
     public Loader<List<Earthquake>> onCreateLoader(int i, Bundle bundle) {
+        Log.d(LOG_TAG, "Calling new EarthquakeLoader!");
         // Create a new loader for the given URL
         return new EarthquakeLoader(this, USGS_REQUEST_URL);
     }
 
     @Override
     public void onLoadFinished(Loader<List<Earthquake>> loader, List<Earthquake> earthquakes) {
-        // Clear the adapter of previous earthquake data
+        // Hide loading indicator because the data has been loaded
+        View loadingIndicator = findViewById(R.id.loading_indicator);
+        loadingIndicator.setVisibility(View.GONE);
+
+        mEmptyStateTextView.setText(R.string.no_earthquakes);
+
         earthquakeAdapter.clear();
 
         // If there is a valid list of {@link Earthquake}s, then add them to the adapter's
