@@ -5,6 +5,9 @@
       <map>
         <entry key="app/src/main/res/layout/earthquake_activity.xml" value="0.2513586956521739" />
         <entry key="app/src/main/res/layout/earthquake_list_item.xml" value="0.14947916666666666" />
+        <entry key="app/src/main/res/layout/settings_activity.xml" value="0.2833333333333333" />
+        <entry key="app/src/main/res/menu/main.xml" value="0.2833333333333333" />
+        <entry key="app/src/main/res/xml/settings_main.xml" value="0.2833333333333333" />
       </map>
     </option>
   </component>
